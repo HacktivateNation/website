@@ -15,36 +15,28 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
 </head>
 <body class="bg-white overflow-x-hidden">
-    <header class="bg-black text-white fixed top-0 left-0 right-0 z-20">
-        <div class="container mx-auto px-4 py-2 flex items-center justify-between">
-          <div class="flex items-center">
+  <header class="bg-black text-white fixed top-0 left-0 right-0 z-20">
+    <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center">
             <a href="#section1" class="text-2xl font-bold">
                 <img src="./images/HLogo.png" alt="Hackivate H Logo" class="w-[72px]" />
             </a>
-          </div>
-          <nav class="hidden md:flex space-x-4">
-            <a href="#section2" class="text-white">Upcoming</a>
-            <a href="#section3" class="text-white">Events</a>
-            <a href="#section4" class="text-white">About</a>
-            <a href="#section5" class="text-white">Connect</a>
-          </nav>
-          <div class="md:hidden flex items-center">
-            <button id="menuButton" class="mobile-menu-button">
-              <!-- <i class="material-icons text-white">face</i> -->
-              <i class="material-icons md-48">
+        </div>
+        <!-- Single menu adaptable to different screen sizes -->
+        <nav id="menu" class="hidden flex space-x-4">
+            <a href="#section2" class="text-white py-2">Upcoming</a>
+            <a href="#section3" class="text-white py-2">Events</a>
+            <a href="#section4" class="text-white py-2">About</a>
+            <a href="#section5" class="text-white py-2">Connect</a>
+        </nav>
+        <!-- Mobile menu button -->
+        <div id="menuButton" class="flex items-center lg:hidden">
+            <i class="material-icons md-48 text-white">
                 menu
-              </i>
-            </button>
-          </div>
+            </i>
         </div>
-        <!-- Mobile Menu -->
-        <div id="menu" class="hidden mobile-menu bg-black">
-          <a href="#section2" class="menu-item block text-white text-center border-b-2 border-blue-500 py-2">Upcoming</a>
-          <a href="#section3" class="menu-item block text-white text-center border-b-2 border-blue-500 py-2">Events</a>
-          <a href="#section4" class="menu-item block text-white text-center border-b-2 border-blue-500 py-2">About</a>
-          <a href="#section5" class="menu-item block text-white text-center py-2">Connect</a>
-        </div>
-    </header>
+    </div>
+  </header>
     <section id="section1" class="bg-black w-full h-auto h-screen flex flex-col items-center justify-center relative z-10">
         <a href="#section2" class="hidden md:block w-full bg-black p-6 absolute bottom-0 text-white text-3xl text-center p-6 z-20">Go to Next Section</a>
         <div class="w-full h-screen flex flex-col items-center justify-center z-10">
@@ -145,20 +137,59 @@
     
 
     <script>
-      const menuButton = document.querySelector('#menuButton');
-      const menu = document.querySelector('#menu');
-      const menuItems = document.querySelectorAll('.menu-item');
+     // Get menu and menu button elements
+const menu = document.getElementById('menu');
+const menuButton = document.getElementById('menuButton');
 
-      menuButton.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-      });
+// Function to toggle the menu
+const toggleMenu = () => {
+    menu.classList.toggle('hidden');
+    if (!menu.classList.contains('hidden')) {
+        menu.classList.add('flex-col');
+        menu.classList.remove('space-x-4');
+    } else {
+        menu.classList.remove('flex-col');
+        menu.classList.add('space-x-4');
+    }
+};
 
-      // Toggle 'hidden' class for all elements with class 'menu-item'
-      menuItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          menu.classList.toggle('hidden');
-        })
-      });
+// Toggle menu visibility on button click
+menuButton.addEventListener('click', toggleMenu);
+
+// Close the menu when clicking outside the menu or on a menu item, only if the hamburger menu is visible
+document.addEventListener('click', (e) => {
+    if (!menuButton.classList.contains('hidden') && !menu.contains(e.target) && !menuButton.contains(e.target)) {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex-col');
+        menu.classList.add('space-x-4');
+    }
+});
+
+// Close the menu when a menu item is clicked, only if in hamburger mode
+menu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && !menuButton.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex-col');
+        menu.classList.add('space-x-4');
+    }
+});
+
+// Update menu layout based on screen size
+const updateMenuLayout = () => {
+    if (window.innerWidth >= 1024) {
+        menu.classList.remove('hidden', 'flex-col');
+        menu.classList.add('flex', 'space-x-4');
+        menuButton.classList.add('hidden');
+    } else {
+        menu.classList.add('hidden');
+        menuButton.classList.remove('hidden');
+    }
+};
+
+window.addEventListener('resize', updateMenuLayout);
+
+// Initial setting based on screen size
+updateMenuLayout();
     </script>
     
 
