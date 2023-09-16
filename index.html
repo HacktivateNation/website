@@ -13,30 +13,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://code.createjs.com/easeljs-0.7.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-</head>
-<body class="bg-white overflow-x-hidden">
-  <header class="bg-black text-white fixed top-0 left-0 right-0 z-20">
-    <div class="mx-auto px-4 py-2 flex items-center justify-between">
-        <div class="flex items-center">
-            <a href="#section1" class="text-2xl font-bold">
-                <img src="./images/HLogo.png" alt="Hackivate H Logo" class="w-[72px]" />
+  </head>
+  <body class="bg-white overflow-x-hidden">
+    <header class="bg-black text-white fixed top-0 left-0 right-0 z-20">
+    <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <!-- Logo will now be part of the navigation but will always stay on the left -->
+        <nav class="flex items-center w-full">
+            <a href="#section1" class="flex-shrink-0">
+                <img src="./images/HLogo.png" alt="Hackivate H Logo" style="width: 72px;" />
             </a>
-        </div>
-        <!-- Single menu adaptable to different screen sizes -->
-        <nav id="menu" class="hidden flex space-x-4">
-            <a href="#section2" class="text-white py-2">Upcoming</a>
-            <a href="#section3" class="text-white py-2">Events</a>
-            <a href="#section4" class="text-white py-2">About</a>
-            <a href="#section5" class="text-white py-2">Connect</a>
+            <!-- Menu items now have their own container -->
+            <div id="menu" class="menu-items hidden lg:flex space-x-4 ml-auto">
+                <a href="#section2" class="text-white py-2">Upcoming</a>
+                <a href="#section3" class="text-white py-2">Events</a>
+                <a href="#section4" class="text-white py-2">About</a>
+                <a href="#section5" class="text-white py-2">Connect</a>
+            </div>
+            <!-- Mobile menu button remains unchanged -->
+            <div id="menuButton" class="menu-button flex lg:hidden ml-auto">
+                <i class="material-icons md-48 text-white">menu</i>
+            </div>
         </nav>
-        <!-- Mobile menu button -->
-        <div id="menuButton" class="flex items-center lg:hidden">
-            <i class="material-icons md-48 text-white">
-                menu
-            </i>
-        </div>
     </div>
-  </header>
+</header>
   <main>
   <section id="section1" class="bg-black w-full h-auto h-screen flex flex-col items-center justify-center relative z-10">
     <!-- 'Go to Next Section' now uses button with ARIA role -->
@@ -50,7 +49,7 @@
         <canvas id='c'></canvas>
     </div>
   </section>
-  <section id="section2" class="h-auto md:h-screen bg-gray-100 grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+  <section id="section2" class="h-auto md:h-screen bg-gray-100 grid md:grid-cols-2 gap-8 py-10 relative z-10">
     <!-- Adjusted layout for smaller screens -->
     <button aria-label="Go to Next Section" onclick="location.href='#section3'" class="hidden md:block w-full bg-black p-6 absolute bottom-0 text-white text-3xl text-center p-6 z-20">Go to Next Section</button>
     <div class="card text-center bg-white p-6 rounded-lg shadow-lg text-center px-8 py-10 flex flex-col items-center justify-center">
@@ -60,12 +59,12 @@
             Join us at our upcoming event where we'll be focusing entirely on collaboration in software development projects. This is a great opportunity for developers of all levels to learn, share knowledge, and contribute to projects. Let's code, collaborate, and create together!
         </p>
     </div>
-    <div class="bg-center flex flex-col items-center justify-center">
+    <div class="bg-center flex flex-col items-center bg-[url('/images/factory1.jpg')] justify-center">
         <!-- Added lazy loading -->
         <img src="./images/HBots.png" alt="Robots fabricating the Hacktivate H Logo" class="m-auto" loading="lazy">
     </div>
     </section>
-    <section id="section3" class="h-auto md:h-screen pb-12 md:pt-0 md:pb-8 bg-black w-full flex flex-col items-center justify-center relative z-10">
+    <section id="section3" class="h-auto h-screen pt-[40em] pb-[60em] md:pt-0 md:pb-8 bg-black w-full flex flex-col items-center justify-center relative z-10">
       <button aria-label="Go to Next Section" onclick="location.href='#section4'" class="hidden md:block w-full bg-black p-6 absolute bottom-0 text-white text-3xl text-center p-6 z-20">Go to Next Section</button>
       <!-- <section id="events" class="h-screen container flex flex-col items-center justify-center mx-auto p-8 rounded-lg shadow-lg z-0"> -->
             <h2 class="text-4xl text-[#4be0b1] font-bold mt-8 sm:md:pt-0">Our Events</h2>
@@ -84,7 +83,7 @@
               <div class="bg-white p-6 rounded-lg shadow-lg">
                 <h3 class="text-center text-2xl font-semibold text-[#d801e5] ">Networking</h3>
                 <p class="text-center text-2xl mt-2 ">Connect and Collaborate.</p>
-                <p class="text-base mt-4 ">What sets our events apart is the emphasis on comunity and networking. Meet potential collaborators, mentors and even future employers. Your next big opportunity could be just a conversation away.</p>
+                <p class="text-base mt-4 ">What sets our events apart is the emphasis on community and networking. Meet potential collaborators, mentors and even future employers. Your next big opportunity could be just a conversation away.</p>
               </div>
             </div>
           <!-- </section>         -->
@@ -140,34 +139,7 @@
           </div>          
         </div>
       </section>
-      <section id="section6" class="py-8">
-        <div class="card mx-auto px-4">
-          <h2 class="text-3xl font-bold text-center mb-6">Contact Us</h2>
-          <form id="contactForm" action="/submit_contact" method="post">
-            <div class="mb-4">
-              <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
-              <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            </div>
-            <div class="mb-4">
-              <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
-              <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            </div>
-            <div class="mb-4">
-              <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message:</label>
-              <textarea id="message" name="message" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="4" required></textarea>
-            </div>
-            <div class="mb-4">
-              <div class="g-recaptcha" data-sitekey="your-recaptcha-site-key"></div>
-            </div>
-            <div class="flex items-center justify-between">
-              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Send
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-      
+           
     </main>
       <footer id="footer" class="bg-black text-white py-2 relative z-10">
         <div class="container mx-auto text-center">
@@ -177,82 +149,8 @@
       
       
     </body>
-    <script>
-     // Get menu and menu button elements
-const menu = document.getElementById('menu');
-const menuButton = document.getElementById('menuButton');
-
-// Function to toggle the menu
-const toggleMenu = () => {
-    menu.classList.toggle('hidden');
-    if (!menu.classList.contains('hidden')) {
-        menu.classList.add('flex-col');
-        menu.classList.remove('space-x-4');
-    } else {
-        menu.classList.remove('flex-col');
-        menu.classList.add('space-x-4');
-    }
-};
-
-// Toggle menu visibility on button click
-menuButton.addEventListener('click', toggleMenu);
-
-// Close the menu when clicking outside the menu or on a menu item, only if the hamburger menu is visible
-document.addEventListener('click', (e) => {
-    if (!menuButton.classList.contains('hidden') && !menu.contains(e.target) && !menuButton.contains(e.target)) {
-        menu.classList.add('hidden');
-        menu.classList.remove('flex-col');
-        menu.classList.add('space-x-4');
-    }
-});
-
-// Close the menu when a menu item is clicked, only if in hamburger mode
-menu.addEventListener('click', (e) => {
-    if (e.target.tagName === 'A' && !menuButton.classList.contains('hidden')) {
-        menu.classList.add('hidden');
-        menu.classList.remove('flex-col');
-        menu.classList.add('space-x-4');
-    }
-});
-
-// Update menu layout based on screen size
-const updateMenuLayout = () => {
-    if (window.innerWidth >= 1024) {
-        menu.classList.remove('hidden', 'flex-col');
-        menu.classList.add('flex', 'space-x-4');
-        menuButton.classList.add('hidden');
-    } else {
-        menu.classList.add('hidden');
-        menuButton.classList.remove('hidden');
-    }
-};
-
-window.addEventListener('resize', updateMenuLayout);
-
-// Initial setting based on screen size
-updateMenuLayout();
-
-    </script>
     
-
+    <script src="./js/menu.js"></script>
     <script src="./js/lightning.js"></script>
-    <!-- <script src="./js/particles.js"></script> -->
-    <!-- <script src="./js/honeycomb.js"></script> -->
-    <!-- <script src="./js/fireworks.js"></script> -->
-    <!-- <script src="./js/liquidlights.js"></script> -->
     
-
-
-    <!-- ** There's more to this one: https://codepen.io/tmrDevelops/pen/dMdNvy **-->
-    <!-- <script src="./js/birds.js"></script> -->
-    <!-- ===============================================
-    <script src="./js/ambience.js"></script> -->
-    <!-- ***************************************************** -->
-    
-
-    <!-- ***** Not working **** -->
-    <!-- <script src="./js/patterns.js"></script> -->
-    <!-- <script src="./js/spinner.js"></script> -->
-    <!-- ******************* -->
-
 </html>
