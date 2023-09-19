@@ -50,6 +50,13 @@ This project is built with [Eleventy](https://www.11ty.dev/), a simpler static s
 
    Open your browser and navigate to `http://localhost:8080/`.
 
+
+4. **Build for Production**:
+
+   ```bash
+   npx eleventy
+   ```
+   
    The generated site will be in the `_site` directory by default.
 
 ### 📝 Contributing
