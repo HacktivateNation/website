@@ -19,7 +19,7 @@
   "name": "hacktivate-eleventy",
   "version": "1.0.0",
   "description": "Hacktivate website build with 11ty",
-  "main": "eleventy.js",
-  "author": "MTanner",
+  "main": "main.js",
+  "author": "MTanner, Guru",
   "license": "ISC"
 }
